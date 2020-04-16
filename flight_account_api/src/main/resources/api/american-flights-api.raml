@@ -1,0 +1,78 @@
+#%RAML 1.0
+title: American Flights API
+version: v1
+description: |
+  This document represents System API for Mule United Airport.  At present, it supports resources and methods that deal with flight information supported by American Airlines Flights API.  This specification will be updated  to support other areas of functionality for American Airlines Flights.
+protocols:
+  - HTTP
+  - HTTPS
+
+
+types:
+  AmericanFlight: !include datatypes/AmericanFlight.raml
+
+/flights:
+  get:
+    displayName: Get all flights
+    description: Retrieves a list of all flights
+    queryParameters:
+      destination?:
+        description: Represents 3-letter destination city code
+        enum:
+          - LAX
+          - CLE
+          - SFO
+          - ALL
+        example: CLE
+        type: string
+        minLength: 3
+        maxLength: 3
+    responses:
+      "200":
+        description: Success
+        body:
+          application/json:
+            description: Represents a sample flight collection
+            type: AmericanFlight[]
+            examples:
+              out: !include examples/americanFlightsExample.raml
+  post:
+    displayName: Add a flight
+    description: Add/Create a new flight details to the existing list of flights
+    body:
+      application/json:
+        description: Represents sample flight data that needs to be added to the list of flights (minus ID)
+        type: AmericanFlight
+        examples:
+          in: !include examples/americanFlightNoIdExample.raml
+    responses:
+      "201":
+        description: Success
+        body:
+          application/json:
+            type: object
+            example:
+              message: Flight added successfully (but not really)
+
+/flights/{ID}:
+  get:
+    displayName: Get Flight by ID
+    description: Retrieves a flight based on its ID
+    responses:
+      "200":
+        description: Success
+        body:
+          application/json:
+            description: Represents a sample flight data based on its ID
+            type: AmericanFlight
+            examples:
+              out: !include examples/americanFlightExample.raml
+  uriParameters:
+    ID:
+      description: Represents unique flight ID between 1 and 11
+      displayName: ID
+      example: 3
+      type: number
+      minimum: 1
+      maximum: 11
+      format: int
