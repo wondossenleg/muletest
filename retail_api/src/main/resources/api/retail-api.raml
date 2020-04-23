@@ -1,0 +1,180 @@
+#%RAML 1.0
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/d077cf53-84b0-41c4-89d3-2ab479498d02/ # 
+title: Retail API
+
+
+/products:
+  description: A collection of products
+  displayName: Products
+  uriParameters:
+  get:
+    description: get a list of products
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              
+          
+  /{ID}:
+    uriParameters:
+      ID:
+        type: string
+        required: true
+       
+    get:
+      displayName: product ID
+      description: Retrieve product specified by product Id 
+      responses:
+        200:
+          body:
+            application/json:
+        400:
+          body:
+            application/json:
+              example:
+                message: product not found
+    put:
+      displayName: product ID
+      description:  Updates a single product
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: Product updated successfully
+        400:
+          body:
+            application/json:
+              example:
+                message: product not found
+              
+    delete:
+      displayName: product ID
+      description: Delete a single product
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                 message: Product deleted successfully
+                
+        400:
+          body:
+            application/json:
+              example:
+                message: product not found      
+
+              
+  post:
+    description: create a new product
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              message: prodcts created succssesfully 
+
+/productcatagories:
+  description: fetches list of all productcatagory
+  displayName: product catagories
+  
+  get:
+    description: fetches list of all productcatagory
+    responses:
+      200:
+        body:
+          application/json:
+  /{ID}:
+    uriParameters:
+      ID:
+        type: string
+        required: true
+       
+    get:
+      displayName: product catagories ID
+      description: Retrieve product catagories specified by product Id 
+      responses:
+        200:
+          body:
+            application/json:
+
+    put:
+      displayName: product catagories ID
+      description:  Updates a single product catagories
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: product catagories updated successfully
+              
+    delete:
+      displayName: product catagories ID
+      description: Delete a single product catagories
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                 message: product catagories deleted successfully           
+  post:
+    description: create a new product catagories
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              message: product catagories created successfully
+
+/Bills:
+  
+  description: fetches all bill data
+  displayName: Bills
+  
+  get:
+    description: fetches all bill data
+    responses:
+      200:
+        body:
+          application/json:
+  /{ID}:
+    get:
+      displayName: Bill ID
+      description: fetches bill of a particular id 
+      responses:
+        200:
+          body:
+            application/json:
+
+    put:
+      displayName: Bill ID
+      description:  Updates a single bill of a particular id 
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: Bill updated successfully
+              
+    delete:
+      displayName: Bill ID
+      description: Delete a single Bill
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                 message: Bill deleted successfully
+  post:
+    description: create a new Bill
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              message: Bill created successfully
+
+  
+    
+ 
